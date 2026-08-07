@@ -1,2 +1,16 @@
 # Shared brain memory (tracked in its own repo)
 Shared_Brain/
+
+# Android / Gradle
+.gradle/
+build/
+local.properties
+*.iml
+.idea/
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+*.ap_
+*.dex
