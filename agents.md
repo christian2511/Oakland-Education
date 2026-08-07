@@ -1,7 +1,4 @@
-# Oakland-Education
-App that offers free agent help for tutoring
-
-## Mandatory startup instructions
+# Mandatory startup instructions
 
 Before doing ANYTHING — before reading other project files, before planning, before writing code, before answering questions — read context from `Shared_Brain/`:
 
