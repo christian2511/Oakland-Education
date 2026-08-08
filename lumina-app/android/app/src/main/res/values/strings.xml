@@ -1,0 +1,7 @@
+<resources>
+  <string name="app_name">Lumina</string>
+  <string name="notif_channel_id">oakland_tutor_channel</string>
+  <string name="notif_channel_name">Lumina Tutor</string>
+  <string name="notif_capture_title">Screen capture running</string>
+  <string name="notif_capture_text">The tutor is watching the screen to help you.</string>
+</resources>
