@@ -84,6 +84,7 @@ class AnthropicTargetLocator(TargetLocator):
             model=MODEL,
             max_tokens=1024,
             thinking={"type": "adaptive"},
+            output_config={"effort": "medium"},
             system=cached_system(POINTING_SYSTEM),
             messages=[
                 {

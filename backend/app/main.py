@@ -9,6 +9,8 @@ from PIL import Image
 
 from app.schemas import (
     Geometry,
+    NormalizedBox,
+    NormalizedPoint,
     SessionStartResponse,
     SessionTranscript,
     SessionTurnOut,
@@ -74,6 +76,7 @@ async def query(
     geometry: str = Form(...),
     scenario: Optional[str] = Form("1"),
     session_id: Optional[str] = Form(None),
+    mode: Optional[str] = Form("ask"),
 ) -> TutorResponse:
     try:
         Geometry.model_validate_json(geometry)
@@ -94,8 +97,21 @@ async def query(
         history = [f"[{t.target_description}] {t.hint}" for t in record.turns]
 
     understanding = vision.get_analyzer().analyze(pil, scenario=scenario or "1")
-    location = pointing.get_locator().locate(pil, understanding)
-    detected = location.found and location.confidence >= pointing.MIN_CONFIDENCE
+
+    if mode == "read":
+        # Idle reads have no red annotation to ground on — skip the pointing
+        # call entirely (one less model round-trip) and address the whole page.
+        location = pointing.TargetLocation(
+            point=NormalizedPoint(x=0.5, y=0.5),
+            bbox=NormalizedBox(x=0.25, y=0.25, width=0.5, height=0.5),
+            confidence=0.0,
+            found=False,
+        )
+        detected = False
+    else:
+        location = pointing.get_locator().locate(pil, understanding)
+        detected = location.found and location.confidence >= pointing.MIN_CONFIDENCE
+
     target_desc = (
         (understanding.target or "the targeted area")
         if detected

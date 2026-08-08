@@ -74,6 +74,7 @@ class AnthropicVisionAnalyzer(VisionAnalyzer):
             model=MODEL,
             max_tokens=2048,
             thinking={"type": "adaptive"},
+            output_config={"effort": "medium"},
             system=cached_system(VISION_SYSTEM),
             messages=[
                 {
