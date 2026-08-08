@@ -14,7 +14,7 @@ from app.schemas import (
     SessionTurnOut,
     TutorResponse,
 )
-from app.services import pointing, tutor, vision
+from app.services import ai_ink, pointing, tutor, vision
 from app.session import SessionRecord, SessionTurn, get_store
 
 app = FastAPI(title="Oakland Tutor")
@@ -127,4 +127,5 @@ async def query(
         bbox=location.bbox,
         confidence=location.confidence,
         hint=hint_text,
+        ai_strokes=ai_ink.for_target(location.point, location.bbox) if detected else [],
     )

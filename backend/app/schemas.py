@@ -24,6 +24,27 @@ class NormalizedBox(BaseModel):
     height: float = Field(ge=0.0, le=1.0)
 
 
+class AiStroke(BaseModel):
+    """Semantic ink primitive rendered client-side (D-024, task 25).
+
+    Geometry is normalized 0..1 in canvas space. Which fields apply depends
+    on kind: circle uses center/rx/ry; arrow and underline use start/end;
+    label uses anchor semantics via start + text/height (client support
+    pending).
+    """
+
+    kind: Literal["circle", "arrow", "underline", "label"]
+    center: Optional[NormalizedPoint] = None
+    rx: Optional[float] = None
+    ry: Optional[float] = None
+    start: Optional[NormalizedPoint] = None
+    end: Optional[NormalizedPoint] = None
+    text: Optional[str] = None
+    height: Optional[float] = None
+    color: str = "#C4685E"
+    width_dp: float = 4.0
+
+
 class TutorResponse(BaseModel):
     selection_detected: bool
     target_description: str
@@ -31,6 +52,7 @@ class TutorResponse(BaseModel):
     bbox: NormalizedBox
     confidence: float = Field(ge=0.0, le=1.0)
     hint: str
+    ai_strokes: list[AiStroke] = []
 
 
 class Understanding(BaseModel):
