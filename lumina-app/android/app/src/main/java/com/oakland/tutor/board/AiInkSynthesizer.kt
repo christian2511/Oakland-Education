@@ -1,6 +1,7 @@
 package com.oakland.tutor.board
 
 import android.graphics.Color
+import android.util.Log
 import androidx.ink.brush.Brush
 import androidx.ink.brush.InputToolType
 import androidx.ink.brush.StockBrushes
@@ -23,6 +24,7 @@ import kotlin.math.sin
  */
 object AiInkSynthesizer {
 
+    private const val TAG = "AiInkSynthesizer"
     private const val DEFAULT_COLOR = 0xFFC4685E.toInt()
     private const val POINT_MS = 6L
 
@@ -37,11 +39,18 @@ object AiInkSynthesizer {
         for (i in 0 until arr.length()) {
             val s = arr.optJSONObject(i) ?: continue
             val brush = brushFor(s, density)
-            when (s.optString("kind")) {
-                "circle" -> circle(s, width, height, brush)?.let(out::add)
-                "arrow" -> out.addAll(arrow(s, width, height, density, brush))
-                "underline" -> underline(s, width, height, brush)?.let(out::add)
-                // "label" lands with the vector-font phase; unknown kinds are skipped.
+            try {
+                when (s.optString("kind")) {
+                    "circle" -> circle(s, width, height, brush)?.let(out::add)
+                    "arrow" -> out.addAll(arrow(s, width, height, density, brush))
+                    "underline" -> underline(s, width, height, brush)?.let(out::add)
+                    // "label" lands with the vector-font phase; unknown kinds are skipped.
+                }
+            } catch (e: IllegalArgumentException) {
+                // alpha07's native input validation rejects whole batches for
+                // reasons outside our control; drop the one primitive instead
+                // of losing the entire injection (and the UI command with it).
+                Log.w(TAG, "ai stroke $i rejected: ${e.message}")
             }
         }
         return out
@@ -73,7 +82,11 @@ object AiInkSynthesizer {
         val batch = MutableStrokeInputBatch()
         var t = 0L
         for ((x, y, pressure) in points) {
-            batch.add(InputToolType.STYLUS, x, y, t, pressure)
+            // Named argument: the 5th positional parameter of add() is
+            // strokeUnitLengthCm, not pressure — passing the taper there makes
+            // the native runtime reject the whole batch ("all inputs must
+            // report the same stroke_unit_length").
+            batch.add(InputToolType.STYLUS, x, y, t, pressure = pressure)
             t += POINT_MS
         }
         return Stroke(brush, batch)
