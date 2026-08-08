@@ -6,7 +6,7 @@ from functools import lru_cache
 import anthropic
 from PIL import Image
 
-MODEL = os.environ.get("TUTOR_MODEL", "claude-opus-4-7")
+MODEL = os.environ.get("TUTOR_MODEL", "claude-sonnet-4-6")
 
 
 @lru_cache(maxsize=1)

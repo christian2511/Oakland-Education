@@ -40,7 +40,7 @@ Each intelligence layer is selected with an env var; every one defaults to
 | `TUTOR_VISION_PROVIDER` | `noop` / `anthropic` | `services/vision.py` — scene understanding |
 | `TUTOR_POINTING_PROVIDER` | `noop` / `anthropic` | `services/pointing.py` — visual grounding |
 | `TUTOR_REASONING_PROVIDER` | `noop` / `anthropic` | `services/tutor.py` — Socratic hint |
-| `TUTOR_MODEL` | model id (default `claude-opus-4-7`) | shared |
+| `TUTOR_MODEL` | model id (default `claude-sonnet-4-6`; use `claude-opus-4-7` for max grounding precision, `claude-haiku-4-5` for cheapest) | shared |
 | `TUTOR_SESSION_STORE` | `memory` (default) / `sqlite` | `app/session.py` |
 | `TUTOR_SESSION_DB` | sqlite path (default `sessions.db`) | with `sqlite` store |
 
