@@ -1,3 +1,5 @@
+from typing import Literal, Optional
+
 from pydantic import BaseModel, Field
 
 
@@ -29,3 +31,39 @@ class TutorResponse(BaseModel):
     bbox: NormalizedBox
     confidence: float = Field(ge=0.0, le=1.0)
     hint: str
+
+
+class Understanding(BaseModel):
+    """Semantic read of the student's work extracted by the vision layer."""
+
+    content_kind: str
+    sample_expression: str
+    target: str
+    domain: str = ""
+    progress: str = ""
+    misconceptions: list[str] = []
+
+
+class HintResult(BaseModel):
+    hint: str
+    follow_up_questions: list[str] = []
+    next_step: Literal["probe", "hint", "encourage", "review"] = "hint"
+
+
+class SessionStartResponse(BaseModel):
+    session_id: str
+    started_at: str
+
+
+class SessionTurnOut(BaseModel):
+    timestamp: str
+    target_description: str
+    hint: str
+    thumbnail_b64: Optional[str] = None
+
+
+class SessionTranscript(BaseModel):
+    session_id: str
+    started_at: str
+    ended_at: Optional[str] = None
+    turns: list[SessionTurnOut] = []
