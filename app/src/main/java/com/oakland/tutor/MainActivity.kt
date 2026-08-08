@@ -33,7 +33,7 @@ import com.oakland.tutor.capture.ScreenCaptureService
 import com.oakland.tutor.permissions.MediaProjectionPermissionManager
 import com.oakland.tutor.tutor.InteractionRecord
 import com.oakland.tutor.tutor.SessionSummaryData
-import com.oakland.tutor.tutor.TutorSession
+import com.oakland.tutor.tutor.SessionSummaryHolder
 import com.oakland.tutor.ui.summary.SessionSummaryScreen
 import com.oakland.tutor.ui.workspace.TutorWorkspaceScreen
 import com.oakland.tutor.workspace.WorkspaceController
@@ -75,18 +75,18 @@ class MainActivity : ComponentActivity() {
                             TutorWorkspaceScreen(
                                 controller = controller,
                                 onBack = {
-                                    TutorSession.setLastSummary(controller.summary)
+                                    SessionSummaryHolder.set(controller.summary)
                                     ScreenCaptureService.stop(this)
                                     route = Route.Setup
                                 },
                                 onOpenSummary = {
-                                    TutorSession.setLastSummary(controller.summary)
+                                    SessionSummaryHolder.set(controller.summary)
                                     route = Route.Summary
                                 },
                             )
                         }
                         Route.Summary -> SessionSummaryScreen(
-                            summaryData = TutorSession.getLastSummary() ?: sampleSummaryData(),
+                            summaryData = SessionSummaryHolder.get() ?: sampleSummaryData(),
                             onClose = { route = Route.Setup },
                         )
                     }

@@ -2,16 +2,10 @@
     <string name="app_name">Oakland Tutor</string>
 
     <string name="setup_title">Oakland AI Math Tutor</string>
-    <string name="grant_overlay">1. Grant overlay permission</string>
-    <string name="grant_projection">2. Grant screen capture</string>
-    <string name="start_session">3. Start tutoring session</string>
-    <string name="stop_session">Stop tutoring session</string>
-    <string name="dev_show_card">Dev: show tutor card at (0.6, 0.4)</string>
+    <string name="grant_projection">Grant screen capture</string>
 
     <string name="notif_channel_id">oakland_tutor_channel</string>
     <string name="notif_channel_name">Oakland Tutor</string>
-    <string name="notif_overlay_title">Tutor is active</string>
-    <string name="notif_overlay_text">Tap the floating bubble to ask a question.</string>
     <string name="notif_capture_title">Screen capture running</string>
     <string name="notif_capture_text">The tutor is watching the screen to help you.</string>
 </resources>
