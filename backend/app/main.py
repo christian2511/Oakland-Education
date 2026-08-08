@@ -1,7 +1,8 @@
 import io
 import json
+from typing import Optional
 
-from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi import FastAPI, File, Form, HTTPException, Query, UploadFile
 from PIL import Image
 
 from app.schemas import Geometry, TutorResponse
@@ -19,6 +20,7 @@ def healthz() -> dict:
 async def query(
     image: UploadFile = File(...),
     geometry: str = Form(...),
+    scenario: Optional[str] = Form("1"),
 ) -> TutorResponse:
     try:
         geom = Geometry.model_validate_json(geometry)
@@ -31,17 +33,14 @@ async def query(
     except Exception as exc:
         raise HTTPException(status_code=422, detail=f"bad image: {exc}") from exc
 
-    if pil.size != (geom.image_width_px, geom.image_height_px):
-        # Not fatal, but the client contract says these should agree.
-        pass
-
-    understanding = vision.analyze(pil)
+    understanding = vision.analyze(pil, scenario=scenario or "1")
     point, bbox, confidence = pointing.locate(pil, understanding)
-    hint_text = tutor.hint(understanding, target_description="the +4 term")
+    target_desc = understanding.get("target", "the targeted area")
+    hint_text = tutor.hint(understanding, target_description=target_desc)
 
     return TutorResponse(
         selection_detected=True,
-        target_description="the +4 term",
+        target_description=target_desc,
         point=point,
         bbox=bbox,
         confidence=confidence,

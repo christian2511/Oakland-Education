@@ -16,6 +16,8 @@ import com.oakland.tutor.tutor.TutorSession
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 /**
  * Foreground service that owns all overlay windows. Started when the user
@@ -31,6 +33,8 @@ class TutorOverlayService : Service() {
         super.onCreate()
         startForegroundInternal()
         session = TutorSession(this, scope)
+        TutorSession.setLastSummary(session.summaryData)
+
         manager = OverlayManager(
             this,
             onBubbleTapped = { manager.setMode(OverlayMode.ANNOTATE) },
@@ -46,7 +50,16 @@ class TutorOverlayService : Service() {
                 }
             }
         )
+
+        session.state
+            .onEach { state -> manager.updateSessionState(state) }
+            .launchIn(scope)
+
         manager.start()
+
+        session.startPeriodicMonitoring { detector ->
+            // Change detected during periodic monitoring
+        }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -65,6 +78,9 @@ class TutorOverlayService : Service() {
     }
 
     override fun onDestroy() {
+        session.stopPeriodicMonitoring()
+        session.summaryData.endTimeMs = System.currentTimeMillis()
+        TutorSession.setLastSummary(session.summaryData)
         manager.stop()
         scope.coroutineContext[Job]?.cancel()
         super.onDestroy()

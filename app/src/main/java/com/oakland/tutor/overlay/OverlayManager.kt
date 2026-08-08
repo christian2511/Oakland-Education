@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.DisplayMetrics
 import android.view.WindowManager
 import com.oakland.tutor.ink.AnnotationState
+import com.oakland.tutor.tutor.SessionState
 
 /**
  * Single owner of the three overlay windows and the current OverlayMode.
@@ -38,6 +39,10 @@ class OverlayManager(
         card.hide()
         bubble.detach()
         mode = OverlayMode.PASSIVE
+    }
+
+    fun updateSessionState(state: SessionState) {
+        bubble.updateState(state)
     }
 
     fun setMode(next: OverlayMode) {

@@ -13,33 +13,45 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.oakland.tutor.tutor.SessionState
 import kotlin.math.abs
 
 /**
  * Small persistent draggable bubble. TYPE_APPLICATION_OVERLAY, WRAP_CONTENT so
  * it does not intercept touches outside its own rectangle. Plan §4A.
+ * Displays state feedback based on [SessionState].
  */
 class BubbleOverlay(
     private val context: Context,
     private val windowManager: WindowManager,
     private val onTap: () -> Unit,
 ) {
+    private var currentState by mutableStateOf(SessionState.IDLE)
 
     private val host = OverlayComposeHost(context).apply {
         setContent {
+            val (bgColor, label) = when (currentState) {
+                SessionState.IDLE -> Color(0xFF3F51B5) to "AI"
+                SessionState.CAPTURING -> Color(0xFFFF9800) to "..."
+                SessionState.AWAITING_RESPONSE -> Color(0xFFFFC107) to "..."
+                SessionState.SHOWING_HINT -> Color(0xFF4CAF50) to "💡"
+            }
             Box(
                 modifier = Modifier
                     .size(56.dp)
                     .clip(CircleShape)
-                    .background(Color(0xFF3F51B5)),
+                    .background(bgColor),
                 contentAlignment = Alignment.Center,
             ) {
-                Text("AI", color = Color.White, style = MaterialTheme.typography.labelLarge)
+                Text(label, color = Color.White, style = MaterialTheme.typography.labelLarge)
             }
         }
     }
@@ -58,6 +70,10 @@ class BubbleOverlay(
     }
 
     private var attached = false
+
+    fun updateState(state: SessionState) {
+        currentState = state
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     fun attach() {
