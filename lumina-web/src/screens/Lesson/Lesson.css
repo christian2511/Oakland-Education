@@ -1,0 +1,233 @@
+/* ==========================================================================
+   Lesson — a full-screen board with everything else floating over it.
+   ========================================================================== */
+
+.lm-lesson {
+  position: relative;
+  overflow: hidden;
+  height: 100dvh;
+}
+
+/* --- header --------------------------------------------------------------- */
+
+.lm-lesson__head {
+  position: fixed;
+  z-index: 40;
+  top: max(14px, env(safe-area-inset-top, 0px));
+  left: max(14px, env(safe-area-inset-left, 0px));
+  right: max(14px, env(safe-area-inset-right, 0px));
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+@media (min-width: 768px) {
+  .lm-lesson__head {
+    top: 22px;
+    left: 26px;
+    right: 26px;
+    gap: 20px;
+  }
+}
+
+/* The board is white, so white-on-white chrome would disappear. Every floating
+   surface in a lesson gets a lavender-tinted ground and a visible edge, which
+   is what separates it from the page the student is writing on. */
+.lm-lesson__progress,
+.lm-lesson__count,
+.lm-lesson__problem {
+  background: rgba(252, 251, 255, 0.92);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid color-mix(in srgb, var(--lm-primary) 16%, transparent);
+  box-shadow:
+    0 2px 5px rgba(37, 35, 42, 0.05),
+    0 14px 34px -12px rgba(105, 81, 216, 0.28);
+}
+
+.lm-lesson__progress {
+  flex: 1;
+  max-width: 300px;
+  padding: 12px 16px;
+  border-radius: var(--r-pill);
+}
+
+.lm-lesson__count {
+  margin-left: auto;
+  padding: 10px 16px;
+  border-radius: var(--r-pill);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--lm-text);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- the problem ----------------------------------------------------------
+   Sits just under the header, centred, and stays out of the way of the pen. */
+
+.lm-lesson__problem-wrap {
+  position: fixed;
+  z-index: 35;
+  top: calc(max(14px, env(safe-area-inset-top, 0px)) + 62px);
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  padding-inline: max(14px, env(safe-area-inset-left, 0px));
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .lm-lesson__problem-wrap {
+    top: 96px;
+  }
+}
+
+.lm-lesson__problem {
+  pointer-events: auto;
+  max-width: min(560px, calc(100vw - 110px));
+  padding: 14px 24px 16px;
+  border-radius: var(--r-xl);
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .lm-lesson__problem {
+    padding: 18px 34px 20px;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .lm-lesson__problem,
+  .lm-lesson__progress,
+  .lm-lesson__count {
+    background: rgba(255, 255, 255, 0.97);
+  }
+}
+
+.lm-lesson__problem-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.lm-lesson__instruction {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--lm-text-secondary);
+}
+
+/* The California standard the problem is anchored to. */
+.lm-lesson__standard {
+  padding: 3px 9px;
+  border-radius: var(--r-pill);
+  background: var(--lm-wash-blue);
+  color: #3e6fbf;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: help;
+  white-space: nowrap;
+}
+
+/* --- Lumina --------------------------------------------------------------- */
+
+.lm-lesson__tutor {
+  position: fixed;
+  z-index: 45;
+  left: 0;
+  right: 0;
+  bottom: max(16px, env(safe-area-inset-bottom, 0px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  /* Clear of the tool rail on the right. */
+  padding-inline: max(14px, env(safe-area-inset-left, 0px)) 78px;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .lm-lesson__tutor {
+    bottom: 26px;
+    padding-inline: 26px 110px;
+    padding-left: 110px;
+  }
+}
+
+.lm-lesson__tutor > * {
+  pointer-events: auto;
+}
+
+.lm-lesson__tutor .lm-tutor {
+  width: 100%;
+  max-width: 620px;
+}
+
+.lm-lesson__advance {
+  display: flex;
+  justify-content: center;
+}
+
+/* The CTA after a question is a full-strength control, not a whisper. */
+.lm-lesson__advance .lm-btn {
+  min-width: 200px;
+  box-shadow:
+    var(--e-3),
+    0 14px 30px -10px color-mix(in srgb, var(--lm-primary) 60%, transparent);
+}
+
+/* "I'm stuck" is always available and must always be findable — on a white
+   board that means a tinted ground and a coloured edge, not a white pill. */
+.lm-lesson__advance .lm-btn--secondary {
+  background: var(--lm-soft-lavender);
+  color: var(--lm-deep-purple);
+  box-shadow:
+    var(--e-3),
+    0 12px 28px -10px rgba(105, 81, 216, 0.4),
+    inset 0 0 0 2px color-mix(in srgb, var(--lm-primary) 26%, transparent);
+}
+
+.lm-lesson__advance .lm-btn--secondary:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--lm-soft-lavender) 82%, var(--lm-lavender));
+}
+
+/* --- landscape ------------------------------------------------------------
+   Wider screens push the problem to the top-left corner so the middle of the
+   board stays completely clear to write on. */
+
+@media (orientation: landscape) and (min-width: 900px) {
+  .lm-lesson__problem-wrap {
+    top: 90px;
+    justify-content: flex-start;
+    padding-left: 26px;
+  }
+
+  .lm-lesson__problem {
+    text-align: left;
+    max-width: 440px;
+  }
+
+  .lm-lesson__problem-top {
+    justify-content: flex-start;
+  }
+
+  .lm-lesson__tutor {
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .lm-lesson__tutor .lm-tutor {
+    max-width: 560px;
+  }
+
+  .lm-lesson__advance {
+    flex: none;
+    align-self: flex-end;
+  }
+}

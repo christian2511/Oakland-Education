@@ -1,0 +1,95 @@
+.lm-circle {
+  --circle-accent: var(--lm-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex: none;
+  color: var(--lm-text);
+  transition:
+    background var(--t-micro) var(--ease),
+    color var(--t-micro) var(--ease),
+    box-shadow var(--t-micro) var(--ease);
+}
+
+.lm-circle:disabled {
+  opacity: 0.32;
+  cursor: not-allowed;
+}
+
+/* Touch targets stay generous even when the visual circle is small. */
+.lm-circle--sm {
+  width: 40px;
+  height: 40px;
+}
+.lm-circle--md {
+  width: 48px;
+  height: 48px;
+}
+.lm-circle--lg {
+  width: 60px;
+  height: 60px;
+}
+
+@media (min-width: 768px) {
+  .lm-circle--sm {
+    width: 44px;
+    height: 44px;
+  }
+  .lm-circle--md {
+    width: 54px;
+    height: 54px;
+  }
+  .lm-circle--lg {
+    width: 66px;
+    height: 66px;
+  }
+}
+
+/* --- tones --------------------------------------------------------------- */
+
+.lm-circle--glass {
+  background: var(--glass-bg-strong);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  box-shadow:
+    var(--e-2),
+    inset 0 0 0 1px var(--glass-border);
+}
+
+.lm-circle--solid {
+  background: var(--lm-white);
+  box-shadow: var(--e-2);
+}
+
+.lm-circle--soft {
+  background: var(--lm-soft-lavender);
+  box-shadow: var(--e-1), var(--e-lift);
+}
+
+.lm-circle--accent {
+  color: var(--lm-white);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--circle-accent) 88%, white), var(--circle-accent));
+  box-shadow:
+    var(--e-2),
+    0 8px 20px -8px color-mix(in srgb, var(--circle-accent) 70%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.lm-circle--plain {
+  background: transparent;
+  color: var(--lm-text-secondary);
+}
+
+.lm-circle--plain:hover:not(:disabled) {
+  background: rgba(37, 35, 42, 0.05);
+  color: var(--lm-text);
+}
+
+.lm-circle.is-active:not(.lm-circle--accent) {
+  background: var(--circle-accent);
+  color: var(--lm-white);
+  box-shadow:
+    var(--e-2),
+    0 8px 20px -8px color-mix(in srgb, var(--circle-accent) 70%, transparent);
+}

@@ -1,0 +1,42 @@
+.lm-req {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--lm-text-tertiary);
+  transition: color var(--t-quick) var(--ease);
+}
+
+.lm-req.is-met {
+  color: var(--lm-success);
+}
+
+.lm-req__mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+
+.lm-req__ring {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  opacity: 0.45;
+}
+
+.lm-req__tick {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--lm-success);
+  color: var(--lm-white);
+}

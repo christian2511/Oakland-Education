@@ -1,0 +1,41 @@
+.lm-glass {
+  position: relative;
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-shadow);
+}
+
+.lm-glass--light {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+}
+
+.lm-glass--strong {
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
+}
+
+.lm-glass--r-md {
+  border-radius: var(--r-md);
+}
+.lm-glass--r-lg {
+  border-radius: var(--r-lg);
+}
+.lm-glass--r-xl {
+  border-radius: var(--r-xl);
+}
+.lm-glass--r-hero {
+  border-radius: var(--r-hero);
+}
+.lm-glass--r-pill {
+  border-radius: var(--r-pill);
+}
+
+/* Fallback for engines without backdrop-filter (some low-cost Android WebViews):
+   go opaque rather than letting text sit on a see-through wash. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .lm-glass--light,
+  .lm-glass--strong {
+    background: rgba(255, 255, 255, 0.96);
+  }
+}

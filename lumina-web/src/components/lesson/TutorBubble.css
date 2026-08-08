@@ -1,0 +1,167 @@
+.lm-tutor {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: var(--r-xl);
+  /* Glass here is right: it floats over the work without hiding it. */
+  background: var(--glass-bg-strong);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+@media (min-width: 768px) {
+  .lm-tutor {
+    padding: 20px 22px;
+    gap: 16px;
+  }
+}
+
+.lm-tutor.is-correct {
+  background: color-mix(in srgb, var(--lm-green) 30%, rgba(255, 255, 255, 0.9));
+  border-color: color-mix(in srgb, var(--lm-green) 55%, transparent);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .lm-tutor {
+    background: rgba(255, 255, 255, 0.97);
+  }
+}
+
+.lm-tutor__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 2px;
+}
+
+.lm-tutor__tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--lm-text-tertiary);
+}
+
+.lm-tutor__tag strong {
+  color: var(--lm-primary);
+  font-weight: 700;
+}
+
+.lm-tutor__hint {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.42;
+  letter-spacing: -0.015em;
+  color: var(--lm-text);
+}
+
+@media (min-width: 768px) {
+  .lm-tutor__hint {
+    font-size: 1.125rem;
+  }
+}
+
+/* --- thinking ------------------------------------------------------------- */
+
+.lm-tutor__thinking {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--lm-text-secondary);
+}
+
+.lm-tutor__dots {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.lm-tutor__dots i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--lm-primary);
+  animation: lm-tutor-dot 1.2s infinite ease-in-out;
+}
+
+.lm-tutor__dots i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.lm-tutor__dots i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes lm-tutor-dot {
+  0%,
+  60%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+/* --- hint ladder ---------------------------------------------------------- */
+
+.lm-tutor__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.lm-tutor__ladder {
+  display: inline-flex;
+  gap: 5px;
+}
+
+.lm-tutor__ladder span {
+  width: 16px;
+  height: 4px;
+  border-radius: var(--r-pill);
+  background: rgba(37, 35, 42, 0.12);
+  transition: background var(--t-quick) var(--ease);
+}
+
+.lm-tutor__ladder span.is-lit {
+  background: var(--lm-primary);
+}
+
+.lm-tutor__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding-inline: 14px;
+  border-radius: var(--r-pill);
+  background: var(--lm-soft-lavender);
+  color: var(--lm-deep-purple);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  transition: background var(--t-micro) var(--ease);
+}
+
+.lm-tutor__more:hover {
+  background: color-mix(in srgb, var(--lm-soft-lavender) 80%, var(--lm-lavender));
+}
+
+.lm-tutor__check {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--lm-success);
+  color: var(--lm-white);
+  align-self: center;
+}

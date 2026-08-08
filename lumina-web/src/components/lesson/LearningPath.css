@@ -1,0 +1,37 @@
+.lm-path {
+  position: relative;
+  width: 100%;
+}
+
+.lm-path__svg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.lm-path__line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-width: 14;
+}
+
+/* Untravelled route: present, but clearly behind the nodes. */
+.lm-path__line--rest {
+  stroke: rgba(37, 35, 42, 0.06);
+}
+
+.lm-path__line--done {
+  stroke: var(--lm-soft-lavender);
+}
+
+@media (min-width: 768px) {
+  .lm-path__line {
+    stroke-width: 18;
+  }
+}
+
+.lm-path__slot {
+  position: absolute;
+  /* left/top mark the node centre; translate does the rest. */
+  transform: translate(-50%, -50%);
+}

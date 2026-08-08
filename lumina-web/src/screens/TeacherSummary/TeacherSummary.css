@@ -1,0 +1,146 @@
+.lm-teach {
+  position: relative;
+  z-index: 1;
+}
+
+.lm-teach__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 12px;
+}
+
+@media (min-width: 768px) {
+  .lm-teach__inner {
+    gap: 32px;
+  }
+}
+
+.lm-teach__head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.lm-teach__kicker {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lm-primary);
+}
+
+.lm-teach__head h1 {
+  font-size: clamp(1.875rem, 6vw, 2.375rem);
+}
+
+.lm-teach__meta {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--lm-text-secondary);
+}
+
+/* --- blocks --------------------------------------------------------------- */
+
+.lm-teach__block {
+  padding: 22px 24px;
+  border-radius: var(--r-xl);
+  background: var(--lm-white);
+  box-shadow: var(--e-1);
+}
+
+.lm-teach__block--watch {
+  background: linear-gradient(150deg, #ffffff, var(--lm-wash-yellow));
+}
+
+.lm-teach__block h2,
+.lm-teach__suggest h2 {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--lm-text-tertiary);
+  margin-bottom: 12px;
+}
+
+.lm-teach__block ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lm-teach__block li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--lm-text);
+}
+
+.lm-teach__block li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--lm-lavender);
+}
+
+.lm-teach__block--watch li::before {
+  background: var(--lm-warning);
+}
+
+/* Misconceptions carry the description a teacher actually needs. */
+.lm-teach__detail li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: 4px;
+}
+
+.lm-teach__detail strong {
+  font-size: 1.0625rem;
+  font-weight: 700;
+}
+
+.lm-teach__detail span {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--lm-text-secondary);
+  line-height: 1.45;
+}
+
+.lm-teach__detail em {
+  font-style: normal;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #a37c22;
+}
+
+.lm-teach__none {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--lm-text-tertiary);
+}
+
+/* --- suggestion ----------------------------------------------------------- */
+
+.lm-teach__suggest {
+  padding: 24px 26px;
+  border-radius: var(--r-xl);
+  background: linear-gradient(150deg, var(--lm-soft-lavender), var(--lm-wash-blue));
+  box-shadow: var(--e-1), var(--e-lift);
+}
+
+.lm-teach__suggest p {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: -0.018em;
+  color: var(--lm-text);
+  max-width: 42ch;
+}

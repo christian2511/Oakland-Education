@@ -1,0 +1,121 @@
+/* ==========================================================================
+   Lumina design tokens
+   Mirrors src/theme/*.ts. Components reference these variables, never raw hex.
+   ========================================================================== */
+
+:root {
+  /* --- colour ------------------------------------------------------------ */
+  --lm-bg: #f7f5f0;
+  --lm-bg-warm: #fbf8f3;
+  --lm-white: #ffffff;
+
+  --lm-soft-lavender: #e9e2ff;
+  --lm-lavender: #b9a5ff;
+  --lm-primary: #8b6ff0;
+  --lm-deep-purple: #6951d8;
+
+  --lm-soft-blue: #a9c5ff;
+  --lm-blue: #7ea8f7;
+
+  --lm-pink: #f5b6d2;
+  --lm-yellow: #f5d98a;
+  --lm-green: #b8ddbe;
+
+  --lm-text: #25232a;
+  --lm-text-secondary: #77737d;
+  --lm-text-tertiary: #a8a4ae;
+
+  --lm-success: #72b88a;
+  --lm-warning: #e7a84b;
+  --lm-error: #d97979;
+
+  /* Tinted washes — used for large calm areas of colour. */
+  --lm-wash-lavender: #f0ecff;
+  --lm-wash-blue: #e8f0ff;
+  --lm-wash-pink: #fdeef5;
+  --lm-wash-yellow: #fcf4de;
+  --lm-wash-green: #e7f3e9;
+
+  /* Hairlines and dividers. Never a harsh border. */
+  --lm-line: rgba(37, 35, 42, 0.07);
+  --lm-line-strong: rgba(37, 35, 42, 0.12);
+
+  /* --- radius ------------------------------------------------------------ */
+  --r-sm: 12px;
+  --r-md: 18px;
+  --r-lg: 24px;
+  --r-xl: 32px;
+  --r-hero: 40px;
+  --r-pill: 9999px;
+
+  /* --- elevation ---------------------------------------------------------
+     Two-part shadows: a tight contact shadow plus a wide soft ambient one.
+     This is what gives surfaces their slightly-3D, moulded quality.        */
+  --e-1: 0 1px 2px rgba(37, 35, 42, 0.04), 0 4px 14px -6px rgba(37, 35, 42, 0.08);
+  --e-2: 0 2px 4px rgba(37, 35, 42, 0.05), 0 10px 28px -10px rgba(37, 35, 42, 0.12);
+  --e-3: 0 4px 8px rgba(37, 35, 42, 0.06), 0 20px 48px -16px rgba(37, 35, 42, 0.16);
+  --e-4: 0 8px 16px rgba(37, 35, 42, 0.07), 0 32px 72px -20px rgba(37, 35, 42, 0.2);
+  /* Inset highlight that sells the soft-3D look on coloured surfaces. */
+  --e-lift: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+
+  /* --- glass -------------------------------------------------------------
+     Reserved for floating layers above the app: nav, tool bars, hint
+     bubbles, transient overlays. Never for the canvas or every card.       */
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-bg-strong: rgba(255, 255, 255, 0.86);
+  --glass-border: rgba(255, 255, 255, 0.7);
+  --glass-blur: saturate(180%) blur(20px);
+  --glass-shadow: 0 2px 6px rgba(37, 35, 42, 0.05), 0 18px 44px -14px rgba(37, 35, 42, 0.22);
+
+  /* --- spacing ----------------------------------------------------------- */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 44px;
+  --s-8: 64px;
+  --s-9: 88px;
+
+  /* Screen gutters. Widen substantially on tablets — whitespace is the point. */
+  --gutter: 22px;
+  --content-max: 640px;
+
+  /* --- motion ------------------------------------------------------------ */
+  --t-micro: 180ms;
+  --t-quick: 280ms;
+  --t-normal: 360ms;
+  --t-slow: 600ms;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* --- type -------------------------------------------------------------- */
+  --font-sans: 'Plus Jakarta Sans', 'Inter', 'DM Sans', system-ui, -apple-system, sans-serif;
+
+  /* Floating navigation height, so screens can reserve room beneath content. */
+  --nav-h: 74px;
+}
+
+/* Tablet portrait and up: more air, wider measure, larger controls. */
+@media (min-width: 768px) {
+  :root {
+    --gutter: 44px;
+    --content-max: 720px;
+    --nav-h: 82px;
+  }
+}
+
+@media (min-width: 1100px) {
+  :root {
+    --gutter: 64px;
+    --content-max: 780px;
+  }
+}
+
+/* Landscape tablets: keep vertical rhythm tight, let width do the work. */
+@media (orientation: landscape) and (min-width: 900px) {
+  :root {
+    --gutter: 56px;
+  }
+}

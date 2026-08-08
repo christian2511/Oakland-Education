@@ -1,0 +1,66 @@
+.lm-orb {
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+
+.lm-orb__halo {
+  position: absolute;
+  inset: -18%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, var(--orb-halo) 0%, transparent 68%);
+}
+
+.lm-orb__ring {
+  position: absolute;
+  inset: 4%;
+  border-radius: 50%;
+  border: 1.5px solid transparent;
+  /* A ring that is bright on one arc and vanishes on the other, so rotation reads. */
+  background:
+    conic-gradient(
+      from 0deg,
+      transparent 0deg,
+      color-mix(in srgb, var(--orb-core) 85%, transparent) 70deg,
+      transparent 170deg,
+      transparent 360deg
+    )
+    border-box;
+  -webkit-mask:
+    linear-gradient(#000 0 0) padding-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) padding-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.lm-orb__core {
+  position: absolute;
+  inset: 20%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 32% 28%,
+    color-mix(in srgb, var(--orb-core) 25%, white) 0%,
+    var(--orb-core) 55%,
+    color-mix(in srgb, var(--orb-core) 78%, var(--lm-deep-purple)) 100%
+  );
+  box-shadow:
+    0 4px 14px -4px color-mix(in srgb, var(--orb-core) 80%, transparent),
+    inset 0 -2px 6px rgba(37, 35, 42, 0.14);
+}
+
+/* Small specular dot — the touch that makes the orb feel three-dimensional. */
+.lm-orb__spec {
+  position: absolute;
+  top: 26%;
+  left: 30%;
+  width: 16%;
+  height: 16%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  filter: blur(0.5px);
+}

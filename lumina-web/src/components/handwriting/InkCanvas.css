@@ -1,0 +1,25 @@
+.lm-ink {
+  position: absolute;
+  inset: 0;
+  cursor: crosshair;
+}
+
+.lm-ink[data-tool='eraser'] {
+  cursor: cell;
+}
+
+.lm-ink__layer {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+/* Faint ruled guides. Present enough to write straight, quiet enough to ignore. */
+.lm-ink__guides {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to bottom, rgba(139, 111, 240, 0.09) 1px, transparent 1px);
+  background-size: 100% 46px;
+  background-position: 0 34px;
+  pointer-events: none;
+}

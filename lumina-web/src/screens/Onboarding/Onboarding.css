@@ -1,0 +1,183 @@
+.lm-onb {
+  position: relative;
+  z-index: 1;
+}
+
+.lm-onb__progress {
+  width: min(320px, 60vw);
+}
+
+.lm-onb__scroll {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- intro ---------------------------------------------------------------- */
+
+.lm-onb__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex: 1;
+  text-align: center;
+  padding-block: 24px 40px;
+}
+
+.lm-onb__scene {
+  width: min(380px, 82vw);
+  margin-bottom: 4px;
+}
+
+.lm-onb__scene svg {
+  width: 100%;
+  height: auto;
+}
+
+.lm-onb__intro-cta {
+  width: 100%;
+  max-width: 360px;
+  margin-top: 22px;
+}
+
+/* --- question steps ------------------------------------------------------- */
+
+.lm-onb__step {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  padding-block: 22px 48px;
+}
+
+@media (min-width: 768px) {
+  .lm-onb__step {
+    gap: 34px;
+    padding-block: 34px 64px;
+  }
+}
+
+.lm-onb__question {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 20ch;
+}
+
+.lm-onb__question .lm-lede {
+  max-width: 42ch;
+}
+
+@media (min-width: 768px) {
+  .lm-onb__question {
+    max-width: 24ch;
+  }
+}
+
+.lm-onb__options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Grades are short labels — a flowing column of pills reads better than a grid
+   of squares, and stays a single column so the eye scans one list. */
+.lm-onb__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .lm-onb__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .lm-onb__options {
+    gap: 14px;
+  }
+}
+
+@media (orientation: landscape) and (min-width: 900px) {
+  .lm-onb__options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .lm-onb__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* --- honors modal --------------------------------------------------------- */
+
+.lm-onb__honors {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.lm-onb__honors-tag {
+  display: inline-block;
+  padding: 6px 14px;
+  margin-bottom: 6px;
+  border-radius: var(--r-pill);
+  background: var(--lm-wash-yellow);
+  color: #a37c22;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.lm-onb__honors-name {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--lm-primary);
+}
+
+.lm-onb__honors-desc {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--lm-text-secondary);
+  max-width: 34ch;
+  line-height: 1.5;
+}
+
+.lm-onb__honors-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  margin-top: 18px;
+}
+
+/* --- completion ----------------------------------------------------------- */
+
+.lm-onb__finish {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  flex: 1;
+  padding: var(--gutter);
+  text-align: center;
+}
+
+.lm-onb__finish-ring {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, #ffffff 0%, var(--lm-lavender) 45%, var(--lm-primary) 100%);
+  box-shadow:
+    0 14px 40px -12px color-mix(in srgb, var(--lm-primary) 70%, transparent),
+    inset 0 -3px 10px rgba(37, 35, 42, 0.14);
+}
+
+.lm-onb__finish-bar {
+  width: min(280px, 70vw);
+}

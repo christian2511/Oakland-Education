@@ -1,0 +1,37 @@
+.lm-sheader {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: none;
+  padding: 18px var(--gutter) 10px;
+}
+
+@media (min-width: 768px) {
+  .lm-sheader {
+    padding-top: 26px;
+  }
+}
+
+/* Equal-width sides keep the centre slot optically centred regardless of what
+   the trailing slot holds. */
+.lm-sheader__side {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  min-width: 48px;
+}
+
+.lm-sheader__side--end {
+  justify-content: flex-end;
+}
+
+.lm-sheader__centre {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}

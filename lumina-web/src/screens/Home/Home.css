@@ -1,0 +1,214 @@
+.lm-home {
+  position: relative;
+  z-index: 1;
+}
+
+.lm-home__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-top: 22px;
+}
+
+@media (min-width: 768px) {
+  .lm-home__inner {
+    gap: 40px;
+    padding-top: 34px;
+  }
+}
+
+/* --- greeting -------------------------------------------------------------- */
+
+.lm-home__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.lm-home__greet {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.lm-home__hello {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--lm-text-secondary);
+}
+
+.lm-home__hello span {
+  color: var(--lm-primary);
+  font-weight: 700;
+}
+
+.lm-home__greet h1 {
+  font-size: clamp(1.75rem, 6vw, 2.5rem);
+  max-width: 16ch;
+}
+
+.lm-home__meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+}
+
+.lm-home__streak {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 40px;
+  padding-inline: 14px;
+  border-radius: var(--r-pill);
+  background: var(--lm-wash-yellow);
+  color: #b07f21;
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.lm-home__avatar {
+  font-size: 1.0625rem;
+  font-weight: 800;
+  color: var(--lm-primary);
+}
+
+/* --- next up ---------------------------------------------------------------
+   One prominent surface, deliberately not one of four equal tiles.          */
+
+.lm-home__next {
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+  border-radius: var(--r-hero);
+  background: linear-gradient(150deg, #ffffff 0%, var(--lm-wash-lavender) 100%);
+  box-shadow: var(--e-3), var(--e-lift);
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .lm-home__next {
+    padding: 34px 36px;
+  }
+}
+
+/* A soft field of colour bleeding in from the corner gives the surface depth
+   without adding another container. */
+.lm-home__next-glow {
+  position: absolute;
+  top: -70px;
+  right: -60px;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--lm-lavender) 0%, transparent 68%);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.lm-home__next-head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.lm-home__next-kicker {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lm-primary);
+}
+
+.lm-home__next-title {
+  font-size: clamp(1.375rem, 4.5vw, 1.75rem);
+  letter-spacing: -0.028em;
+  margin-top: 2px;
+}
+
+.lm-home__next-sub {
+  position: relative;
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--lm-text-secondary);
+  max-width: 34ch;
+}
+
+.lm-home__next-foot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+.lm-home__next-foot .lm-btn {
+  margin-left: auto;
+}
+
+.lm-home__chip {
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  padding-inline: 14px;
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, 0.75);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--lm-text-secondary);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.9);
+}
+
+/* --- journey ---------------------------------------------------------------- */
+
+.lm-home__journey {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lm-home__journey-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.lm-home__journey-head h3 {
+  font-size: 1.25rem;
+}
+
+.lm-home__journey-count {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--lm-text-tertiary);
+}
+
+.lm-home__path {
+  padding-top: 8px;
+}
+
+/* The final node's label must clear the floating navigation, so the path keeps
+   a tail of empty space below its last stop. */
+.lm-home__journey {
+  padding-bottom: 8px;
+}
+
+/* Landscape tablets: greeting and next-up sit side by side so the path starts
+   higher up the screen. */
+@media (orientation: landscape) and (min-width: 1000px) {
+  .lm-home__inner {
+    gap: 32px;
+  }
+
+  .lm-home__greet h1 {
+    max-width: 22ch;
+  }
+}

@@ -1,0 +1,115 @@
+.lm-mission {
+  position: relative;
+  z-index: 1;
+}
+
+.lm-mission__top {
+  position: relative;
+  z-index: 10;
+  flex: none;
+  padding: 18px var(--gutter) 0;
+}
+
+.lm-mission__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  padding-block: 18px 40px;
+  max-width: 640px;
+}
+
+.lm-mission__mark {
+  margin-bottom: 2px;
+}
+
+.lm-mission__kicker {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lm-primary);
+}
+
+/* The statement itself, set large. */
+.lm-mission__lead {
+  font-size: clamp(1.75rem, 5.4vw, 2.625rem);
+  font-weight: 700;
+  letter-spacing: -0.032em;
+  line-height: 1.14;
+  text-wrap: balance;
+}
+
+.lm-mission__body {
+  font-size: clamp(1.0625rem, 2.6vw, 1.25rem);
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--lm-text-secondary);
+  max-width: 46ch;
+}
+
+.lm-mission__scene {
+  width: min(400px, 100%);
+  align-self: center;
+  margin-block: 6px;
+}
+
+.lm-mission__scene svg {
+  width: 100%;
+  height: auto;
+}
+
+/* --- the local number ------------------------------------------------------ */
+
+.lm-mission__stat {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+  padding: 24px 26px;
+  border-radius: var(--r-xl);
+  background: linear-gradient(150deg, #ffffff, var(--lm-wash-lavender));
+  box-shadow: var(--e-1), var(--e-lift);
+  flex-wrap: wrap;
+}
+
+.lm-mission__stat-figure {
+  font-size: clamp(2rem, 7vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--lm-primary);
+  line-height: 1;
+  flex: none;
+}
+
+.lm-mission__stat p {
+  flex: 1;
+  min-width: 220px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--lm-text-secondary);
+}
+
+.lm-mission__closing {
+  font-size: clamp(1rem, 2.4vw, 1.125rem);
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--lm-text);
+  max-width: 46ch;
+}
+
+.lm-mission__closing em {
+  font-style: italic;
+  font-weight: 700;
+  color: var(--lm-primary);
+}
+
+.lm-mission__cta {
+  width: 100%;
+  max-width: 360px;
+  margin-top: 12px;
+  align-self: center;
+}

@@ -1,0 +1,27 @@
+.lm-progress {
+  --prog-accent: var(--lm-primary);
+  position: relative;
+  width: 100%;
+  border-radius: var(--r-pill);
+  background: rgba(37, 35, 42, 0.075);
+  overflow: hidden;
+}
+
+.lm-progress--sm {
+  height: 6px;
+}
+
+.lm-progress--md {
+  height: 10px;
+}
+
+.lm-progress__fill {
+  height: 100%;
+  border-radius: var(--r-pill);
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--prog-accent) 70%, var(--lm-soft-blue)) 0%,
+    var(--prog-accent) 100%
+  );
+  box-shadow: 0 2px 8px -2px color-mix(in srgb, var(--prog-accent) 70%, transparent);
+}

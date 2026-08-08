@@ -1,0 +1,152 @@
+.lm-btn {
+  --btn-accent: var(--lm-primary);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: var(--r-pill);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+  transition:
+    background var(--t-micro) var(--ease),
+    box-shadow var(--t-micro) var(--ease),
+    color var(--t-micro) var(--ease),
+    opacity var(--t-micro) var(--ease);
+}
+
+.lm-btn:active {
+  /* Shadow compresses with the scale so the button feels pressed into the page. */
+  box-shadow: var(--e-1);
+}
+
+/* Disabled still has to be readable — 0.42 opacity on a pale ground made the
+   label vanish. Desaturate to a flat neutral instead of fading it out. */
+.lm-btn:disabled {
+  cursor: not-allowed;
+  background: rgba(37, 35, 42, 0.08);
+  color: var(--lm-text-tertiary);
+  box-shadow: none;
+}
+
+.lm-btn__label {
+  display: block;
+}
+
+.lm-btn__affix {
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+
+/* --- sizes --------------------------------------------------------------- */
+
+.lm-btn--sm {
+  min-height: 42px;
+  padding: 0 18px;
+  font-size: 0.9375rem;
+}
+
+.lm-btn--md {
+  min-height: 52px;
+  padding: 0 24px;
+  font-size: 1rem;
+}
+
+.lm-btn--lg {
+  min-height: 60px;
+  padding: 0 32px;
+  font-size: 1.0625rem;
+}
+
+@media (min-width: 768px) {
+  .lm-btn--md {
+    min-height: 56px;
+  }
+  .lm-btn--lg {
+    min-height: 66px;
+    font-size: 1.125rem;
+    padding: 0 38px;
+  }
+}
+
+.lm-btn--full {
+  width: 100%;
+}
+
+/* --- variants ------------------------------------------------------------ */
+
+/* Lit from above and shaded below, so the pill reads as a moulded object
+   rather than a flat swatch. */
+.lm-btn--primary {
+  color: var(--lm-white);
+  background: linear-gradient(
+    180deg,
+    var(--btn-accent) 0%,
+    color-mix(in srgb, var(--btn-accent) 78%, #2f2560) 100%
+  );
+  box-shadow:
+    var(--e-2),
+    0 12px 26px -10px color-mix(in srgb, var(--btn-accent) 78%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32);
+}
+
+.lm-btn--primary:hover:not(:disabled) {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--btn-accent) 92%, white) 0%,
+    color-mix(in srgb, var(--btn-accent) 82%, #2f2560) 100%
+  );
+}
+
+/* Dark text on a soft pastel — used where a coloured CTA would shout. */
+.lm-btn--soft {
+  color: var(--lm-deep-purple);
+  background: var(--lm-soft-lavender);
+  box-shadow: var(--e-2), var(--e-lift);
+}
+
+.lm-btn--soft:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--lm-soft-lavender) 84%, var(--lm-lavender));
+}
+
+/* Quieter than primary, but still unmistakably a button: a solid surface, a
+   real border and its own shadow rather than a hairline outline. */
+.lm-btn--secondary {
+  color: var(--lm-text);
+  background: var(--lm-white);
+  box-shadow:
+    var(--e-2),
+    inset 0 0 0 2px var(--lm-line-strong);
+}
+
+.lm-btn--secondary:hover:not(:disabled) {
+  background: var(--lm-bg-warm);
+  box-shadow:
+    var(--e-3),
+    inset 0 0 0 2px color-mix(in srgb, var(--lm-primary) 45%, transparent);
+}
+
+/* Ghost is for genuinely tertiary actions only, and even then it carries a
+   tinted ground on hover so it never reads as plain text. */
+.lm-btn--ghost {
+  color: var(--lm-text);
+  background: rgba(37, 35, 42, 0.05);
+  font-weight: 700;
+}
+
+.lm-btn--ghost:hover:not(:disabled) {
+  color: var(--lm-text);
+  background: rgba(37, 35, 42, 0.09);
+}
+
+.lm-btn--dark {
+  color: var(--lm-white);
+  background: var(--lm-text);
+  box-shadow: var(--e-2);
+}
+
+.lm-btn--dark:hover:not(:disabled) {
+  background: #34313b;
+}

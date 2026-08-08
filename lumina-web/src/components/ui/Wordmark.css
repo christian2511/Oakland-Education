@@ -1,0 +1,49 @@
+.lm-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.lm-wordmark__word {
+  display: inline-flex;
+  font-weight: 800;
+  letter-spacing: -0.055em;
+  color: var(--lm-text);
+  line-height: 1;
+}
+
+.lm-wordmark--md .lm-wordmark__word {
+  font-size: 1.5rem;
+}
+
+.lm-wordmark--lg .lm-wordmark__word {
+  font-size: 2.5rem;
+}
+
+.lm-wordmark--hero .lm-wordmark__word {
+  font-size: clamp(3.25rem, 13vw, 5.25rem);
+}
+
+/* Each letter fades and settles in place — no typewriter caret, no jitter. */
+.lm-wordmark__char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.14em) scale(0.94);
+  filter: blur(5px);
+  transition:
+    opacity 520ms var(--ease),
+    transform 520ms var(--ease),
+    filter 520ms var(--ease);
+}
+
+.lm-wordmark__char[data-shown='true'] {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+
+/* The "i" — its dot carries the brand's light. */
+.lm-wordmark--hero .lm-wordmark__char:nth-child(4),
+.lm-wordmark--lg .lm-wordmark__char:nth-child(4) {
+  color: var(--lm-primary);
+}

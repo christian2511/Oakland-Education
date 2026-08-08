@@ -1,0 +1,94 @@
+/* The writing surface occupies the entire screen, beneath every floating
+   control. Warm white so it reads as paper rather than as a blank app. */
+.lm-board {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: #fffefb;
+}
+
+/* Ruled guides scale with the viewport so the spacing suits the device rather
+   than a fixed card. */
+.lm-board .lm-ink__guides {
+  background-size: 100% 52px;
+  background-position: 0 120px;
+}
+
+@media (min-width: 768px) {
+  .lm-board .lm-ink__guides {
+    background-size: 100% 64px;
+    background-position: 0 150px;
+  }
+}
+
+@media (orientation: landscape) and (min-width: 900px) {
+  .lm-board .lm-ink__guides {
+    background-position: 0 130px;
+  }
+}
+
+/* --- floating tool rail ---------------------------------------------------
+   Rides the right edge, vertically centred, clear of the problem and the
+   tutor. On short landscape screens it tucks in tighter.                   */
+
+.lm-board__tools {
+  position: fixed;
+  z-index: 40;
+  right: max(14px, env(safe-area-inset-right, 0px));
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 6px;
+  border-radius: var(--r-pill);
+  background: var(--glass-bg-strong);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+@media (min-width: 768px) {
+  .lm-board__tools {
+    right: max(24px, env(safe-area-inset-right, 0px));
+    gap: 6px;
+    padding: 10px 7px;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .lm-board__tools {
+    background: rgba(255, 255, 255, 0.97);
+  }
+}
+
+.lm-board__divider {
+  width: 22px;
+  height: 1px;
+  margin-block: 4px;
+  background: var(--lm-line-strong);
+  flex: none;
+}
+
+/* The rail's own buttons sit on glass already, so they drop their individual
+   glass treatment and read as icons on a shared surface. */
+.lm-board__tools .lm-circle--glass {
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: none;
+  color: var(--lm-text-secondary);
+}
+
+.lm-board__tools .lm-circle--glass:hover:not(:disabled) {
+  background: rgba(37, 35, 42, 0.06);
+  color: var(--lm-text);
+}
+
+.lm-board__tools .lm-circle.is-active {
+  background: var(--circle-accent);
+  color: var(--lm-white);
+  box-shadow: 0 6px 16px -6px color-mix(in srgb, var(--circle-accent) 75%, transparent);
+}

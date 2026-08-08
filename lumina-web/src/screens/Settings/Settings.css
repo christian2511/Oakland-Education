@@ -1,0 +1,226 @@
+.lm-set {
+  position: relative;
+  z-index: 1;
+}
+
+.lm-set__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  padding-top: 32px;
+}
+
+@media (min-width: 768px) {
+  .lm-set__inner {
+    gap: 34px;
+    padding-top: 44px;
+  }
+}
+
+/* --- identity ------------------------------------------------------------- */
+
+.lm-set__head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.lm-set__avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: linear-gradient(160deg, var(--lm-soft-lavender), var(--lm-lavender));
+  color: var(--lm-deep-purple);
+  font-size: 1.5rem;
+  font-weight: 800;
+  box-shadow: var(--e-1), var(--e-lift);
+}
+
+.lm-set__head h1 {
+  font-size: clamp(1.625rem, 5vw, 2rem);
+}
+
+.lm-set__head p {
+  margin-top: 2px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--lm-text-secondary);
+}
+
+.lm-set__upgrade {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 20px;
+  border-radius: var(--r-xl);
+  background: linear-gradient(140deg, #ffffff, var(--lm-wash-lavender));
+  box-shadow: var(--e-1), var(--e-lift);
+  flex-wrap: wrap;
+}
+
+.lm-set__upgrade div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.lm-set__upgrade strong {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.018em;
+}
+
+.lm-set__upgrade span {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--lm-text-secondary);
+}
+
+/* --- sections ------------------------------------------------------------- */
+
+.lm-set__section h2 {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lm-text-tertiary);
+  margin-bottom: 10px;
+  padding-left: 4px;
+}
+
+/* One rounded group per section rather than a card per row. */
+.lm-set__group {
+  border-radius: var(--r-lg);
+  background: var(--lm-white);
+  box-shadow: var(--e-1);
+  overflow: hidden;
+}
+
+.lm-set__row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 16px 20px;
+  text-align: left;
+  color: var(--lm-text);
+  transition: background var(--t-micro) var(--ease);
+}
+
+.lm-set__row + .lm-set__row {
+  box-shadow: inset 0 1px 0 var(--lm-line);
+}
+
+button.lm-set__row:hover {
+  background: var(--lm-bg-warm);
+}
+
+.lm-set__row-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.lm-set__row-label {
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+
+.lm-set__row-caption {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--lm-text-secondary);
+  line-height: 1.4;
+}
+
+.lm-set__row-value {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--lm-text-secondary);
+  text-align: right;
+}
+
+.lm-set__row-chev {
+  color: var(--lm-text-tertiary);
+  flex: none;
+}
+
+.lm-set__row--toggle {
+  align-items: flex-start;
+}
+
+/* --- switch --------------------------------------------------------------- */
+
+.lm-switch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: none;
+  width: 52px;
+  height: 32px;
+  padding: 3px;
+  border-radius: var(--r-pill);
+  background: rgba(37, 35, 42, 0.14);
+  justify-content: flex-start;
+  transition: background var(--t-quick) var(--ease);
+}
+
+.lm-switch.is-on {
+  background: var(--lm-primary);
+  justify-content: flex-end;
+}
+
+.lm-switch__knob {
+  display: block;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--lm-white);
+  box-shadow: 0 2px 5px rgba(37, 35, 42, 0.22);
+}
+
+/* --- reset ---------------------------------------------------------------- */
+
+.lm-set__danger {
+  display: flex;
+  justify-content: center;
+  padding-top: 4px;
+}
+
+.lm-set__danger button {
+  padding: 12px 22px;
+  border-radius: var(--r-pill);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--lm-error);
+  transition: background var(--t-micro) var(--ease);
+}
+
+.lm-set__danger button:hover {
+  background: color-mix(in srgb, var(--lm-error) 10%, transparent);
+}
+
+.lm-set__confirm {
+  margin-top: 10px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--lm-text-secondary);
+  line-height: 1.5;
+}
+
+.lm-set__confirm-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 22px;
+}

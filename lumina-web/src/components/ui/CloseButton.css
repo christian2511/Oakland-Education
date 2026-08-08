@@ -1,0 +1,49 @@
+.lm-close {
+  display: grid;
+  place-items: center;
+  flex: none;
+  border-radius: 50%;
+  color: var(--lm-text);
+}
+
+.lm-close--sm {
+  width: 42px;
+  height: 42px;
+}
+
+.lm-close--md {
+  width: 50px;
+  height: 50px;
+}
+
+@media (min-width: 768px) {
+  .lm-close--md {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+.lm-close--glass {
+  background: var(--glass-bg-strong);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  box-shadow:
+    var(--e-2),
+    inset 0 0 0 1px var(--glass-border);
+}
+
+.lm-close--solid {
+  background: var(--lm-white);
+  box-shadow: var(--e-2);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .lm-close--glass {
+    background: rgba(255, 255, 255, 0.97);
+  }
+}
+
+.lm-close__glyph {
+  display: grid;
+  place-items: center;
+}

@@ -1,0 +1,110 @@
+.lm-field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.lm-field__label {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--lm-text-secondary);
+  padding-left: 4px;
+}
+
+.lm-field__shell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: var(--r-lg);
+  background: var(--lm-white);
+  box-shadow:
+    inset 0 0 0 1.5px var(--lm-line),
+    var(--e-1);
+  transition:
+    box-shadow var(--t-quick) var(--ease),
+    background var(--t-quick) var(--ease);
+}
+
+/* Focus grows an accent ring rather than swapping a hard border colour. */
+.lm-field__shell:focus-within {
+  background: var(--lm-white);
+  box-shadow:
+    inset 0 0 0 2px var(--lm-primary),
+    0 0 0 5px color-mix(in srgb, var(--lm-primary) 14%, transparent),
+    var(--e-2);
+}
+
+.lm-field.is-error .lm-field__shell {
+  box-shadow:
+    inset 0 0 0 2px var(--lm-error),
+    0 0 0 5px color-mix(in srgb, var(--lm-error) 12%, transparent);
+}
+
+.lm-field__input {
+  flex: 1;
+  min-width: 0;
+  min-height: 60px;
+  padding: 0 20px;
+  border: none;
+  outline: none;
+  background: transparent;
+  border-radius: inherit;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--lm-text);
+}
+
+@media (min-width: 768px) {
+  .lm-field__input {
+    min-height: 66px;
+    padding-inline: 24px;
+    font-size: 1.125rem;
+  }
+}
+
+.lm-field__input::placeholder {
+  color: var(--lm-text-tertiary);
+  font-weight: 500;
+}
+
+/* Autofill would otherwise repaint the soft surface a hard yellow. */
+.lm-field__input:-webkit-autofill,
+.lm-field__input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--lm-text);
+  -webkit-box-shadow: 0 0 0 1000px var(--lm-white) inset;
+  caret-color: var(--lm-text);
+}
+
+.lm-field__reveal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-right: 8px;
+  border-radius: 50%;
+  color: var(--lm-text-tertiary);
+  transition: color var(--t-micro) var(--ease), background var(--t-micro) var(--ease);
+}
+
+.lm-field__reveal:hover {
+  color: var(--lm-text-secondary);
+  background: rgba(37, 35, 42, 0.05);
+}
+
+.lm-field__hint,
+.lm-field__error {
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding-left: 4px;
+  overflow: hidden;
+}
+
+.lm-field__hint {
+  color: var(--lm-text-tertiary);
+}
+
+.lm-field__error {
+  color: var(--lm-error);
+  font-weight: 600;
+}

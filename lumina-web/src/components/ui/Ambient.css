@@ -1,0 +1,18 @@
+/* Blob geometry lives in tokens/base; this file tunes the fixed layer itself. */
+
+.lm-ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  /* Contain the blur so it never paints over the whole compositor tree. */
+  contain: strict;
+}
+
+/* Scale the fields up on tablets so they stay atmospheric rather than blotchy. */
+@media (min-width: 768px) {
+  .lm-ambient-blob {
+    filter: blur(96px);
+  }
+}
