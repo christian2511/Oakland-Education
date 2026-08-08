@@ -19,11 +19,6 @@ from app.session import SessionRecord, SessionTurn, get_store
 
 app = FastAPI(title="Oakland Tutor")
 
-NOT_DETECTED_HINT = (
-    "I couldn't tell what you circled — try drawing a tighter circle "
-    "around the part you want help with."
-)
-
 
 def _iso(ts: float) -> str:
     return datetime.fromtimestamp(ts, tz=timezone.utc).isoformat()
@@ -101,21 +96,21 @@ async def query(
     understanding = vision.get_analyzer().analyze(pil, scenario=scenario or "1")
     location = pointing.get_locator().locate(pil, understanding)
     detected = location.found and location.confidence >= pointing.MIN_CONFIDENCE
-    target_desc = understanding.target or "the targeted area"
+    target_desc = (
+        (understanding.target or "the targeted area")
+        if detected
+        else "the student's overall working"
+    )
 
-    if detected:
-        result = tutor.get_reasoner().hint(pil, understanding, target_desc, history)
-        hint_text = result.hint
-    else:
-        hint_text = NOT_DETECTED_HINT
+    result = tutor.get_reasoner().hint(pil, understanding, target_desc, history)
 
-    if session_id and detected:
+    if session_id:
         get_store().append_turn(
             session_id,
             SessionTurn(
                 timestamp=time.time(),
                 target_description=target_desc,
-                hint=hint_text,
+                hint=result.hint,
                 thumbnail_b64=_thumbnail(pil),
             ),
         )
@@ -126,6 +121,8 @@ async def query(
         point=location.point,
         bbox=location.bbox,
         confidence=location.confidence,
-        hint=hint_text,
+        hint=result.hint,
         ai_strokes=ai_ink.for_target(location.point, location.bbox) if detected else [],
+        status=result.status,
+        misconception=result.misconception,
     )

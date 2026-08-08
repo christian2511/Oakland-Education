@@ -15,6 +15,7 @@ FALLBACK_HINT = HintResult(
     "and what rule applies to it?",
     follow_up_questions=["What would be your very first step?"],
     next_step="probe",
+    status="needs_review",
 )
 
 _CANNED = {
@@ -22,16 +23,22 @@ _CANNED = {
         hint="Before adding fractions, what needs to be the same for both denominators?",
         follow_up_questions=["What number do both 2 and 3 divide into evenly?"],
         next_step="probe",
+        status="incorrect",
+        misconception="adding_denominators",
     ),
     "-2x": HintResult(
         hint="What happens to the inequality sign when you divide both sides by a negative number?",
         follow_up_questions=["Try checking your answer with x = -4. Does it work?"],
         next_step="probe",
+        status="incorrect",
+        misconception="inequality_flip",
     ),
     "default": HintResult(
         hint="What else does the 3 multiply inside the parentheses?",
         follow_up_questions=["How many terms are inside the parentheses?"],
         next_step="probe",
+        status="incorrect",
+        misconception="partial_distribution",
     ),
 }
 
@@ -82,11 +89,19 @@ the student seems stuck on the same spot, try a smaller step or a concrete examp
 with different numbers.
 
 Return:
-- hint: the one guiding question or nudge for this turn.
+- hint: the one guiding question or nudge for this turn. When status is correct, this \
+becomes one short congratulatory line instead (still no restating of the answer needed).
 - follow_up_questions: 1-2 questions the tutor could ask next if the student stays stuck.
 - next_step: probe (ask a diagnostic question), hint (nudge at the method), encourage \
 (student is on track, cheer them on), or review (misconception is deep, revisit the \
-underlying concept)."""
+underlying concept).
+- status: your assessment of the visible work — correct (the working is sound and \
+complete, or the current step is right and nothing visible is wrong), incorrect \
+(there is a genuine mistake in the visible work), needs_review (page is empty, \
+unreadable, or you cannot tell yet).
+- misconception: when status is incorrect, a short snake_case id for the most likely \
+misconception (e.g. partial_distribution, adding_denominators, inequality_flip); \
+otherwise null."""
 
 STRICT_RETRY_SUFFIX = """
 

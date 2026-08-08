@@ -53,6 +53,8 @@ class TutorResponse(BaseModel):
     confidence: float = Field(ge=0.0, le=1.0)
     hint: str
     ai_strokes: list[AiStroke] = []
+    status: Literal["correct", "incorrect", "needs_review"] = "needs_review"
+    misconception: Optional[str] = None
 
 
 class Understanding(BaseModel):
@@ -70,6 +72,8 @@ class HintResult(BaseModel):
     hint: str
     follow_up_questions: list[str] = []
     next_step: Literal["probe", "hint", "encourage", "review"] = "hint"
+    status: Literal["correct", "incorrect", "needs_review"] = "needs_review"
+    misconception: Optional[str] = None
 
 
 class SessionStartResponse(BaseModel):
